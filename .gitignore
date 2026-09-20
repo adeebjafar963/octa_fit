@@ -1,0 +1,70 @@
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.cursor/
+
+# Secrets / env
+.env
+.env.local
+.env.*.local
+!**/.env.example
+
+# Flutter / Dart
+mobile/.dart_tool/
+mobile/.flutter-plugins
+mobile/.flutter-plugins-dependencies
+mobile/.packages
+mobile/.pub-cache/
+mobile/.pub/
+mobile/build/
+mobile/.metadata
+**/*.iml
+
+# Laravel / PHP
+backend/vendor/
+backend/node_modules/
+backend/storage/*.key
+backend/storage/logs/*
+backend/storage/framework/cache/*
+backend/storage/framework/sessions/*
+backend/storage/framework/views/*
+backend/bootstrap/cache/*
+!backend/storage/logs/.gitkeep
+!backend/storage/framework/cache/.gitkeep
+!backend/storage/framework/sessions/.gitkeep
+!backend/storage/framework/views/.gitkeep
+!backend/bootstrap/cache/.gitkeep
+backend/public/storage
+backend/public/hot
+
+# Python
+**/__pycache__/
+**/*.py[cod]
+**/.venv/
+**/venv/
+**/.pytest_cache/
+**/.mypy_cache/
+**/*.egg-info/
+
+# Tools / local binaries (do not commit large portable runtimes)
+tools/php*/
+tools/*.exe
+tools/*.zip
+
+# Logs / temp
+*.log
+*.tmp
+.tmp/
+.temp/
+
+# Coverage
+coverage/
+htmlcov/
+.nyc_output/
