@@ -4,75 +4,138 @@
 
 ---
 
-## Phase 0 — Machine & architecture (CURRENT)
+## Phase 0 — Machine & architecture
 
 - [x] Inspect toolchain
 - [x] Create `E:\OCTA_FIT`
 - [x] Establish folder structure
 - [x] Write architecture docs
-- [ ] **STOP** — wait for user to approve Phase 1/2
 
 ---
 
-## Phase 1 — Tooling readiness
+## Phase 1 — Project foundation (COMPLETE)
 
-1. Install Composer into `tools/` (or PATH)
-2. Install portable PHP **8.2+** under `tools/php83` (preferred over PHP 8.0)
-3. Start XAMPP MariaDB
-4. Create MySQL database `octafit`
-5. Copy `.env.example` templates
-6. Verify: `php -v`, `composer -V`, `mysql` ping, `flutter doctor`
-
-**Exit criteria:** Laravel can be created with PHP ≥ 8.2 and Composer.
-
----
-
-## Phase 2 — Laravel backend foundation
-
-1. `composer create-project laravel/laravel backend` (or equivalent into existing folder)
-2. Configure Sanctum
-3. Migrations for core auth tables (users, roles, profiles, settings)
-4. Seed admin + demo user
-5. Unified JSON API response helpers
-6. Feature tests: register/login/me
-
-**Exit criteria:** Auth API works with Postman/HTTP tests; admin can log in later via dashboard stub.
+- [x] Portable PHP 8.3 + Composer PHAR in `tools/`
+- [x] MariaDB `octafit` + foundation migrations
+- [x] Flutter app scaffold (Clean Architecture + Cubit/Dio/GetIt/GoRouter/easy_localization)
+- [x] Splash / Home / Settings (language)
+- [x] Laravel 13 + Sanctum + CORS + `GET /api/health`
+- [x] AI Coach / Physio / Motion FastAPI health stubs
+- [x] Docs + verification (analyze/tests/health)
 
 ---
 
-## Phase 3 — Training domain (Bodybuilding + MMA)
+## Phase 2 — Authentication (COMPLETE)
 
-1. Migrations: categories, exercises, exercise_videos
-2. API resources + policies
-3. Seed 6–7 BB + 6–7 MMA demo items (configurable URLs)
-4. Admin CRUD (simple Blade)
-5. Tests for list/detail
-
-**Exit criteria:** API returns bilingual training catalog.
-
----
-
-## Phase 4 — E-commerce (demo checkout)
-
-1. Product categories, products, cart (server or client+order), orders, order_items
-2. COD / demo checkout only (no payment gateway)
-3. Order history + status
-4. Admin: products + orders
-5. Tests: add-to-order flow
-
-**Exit criteria:** Full demo purchase path without real payments.
+- [x] Register / login / me / logout
+- [x] Profile get/update + password change
+- [x] Roles foundation (`admin` / `user`) + middleware/policy
+- [x] Flutter AuthCubit, secure token storage, interceptor, protected routes
+- [x] AR/EN auth screens + session persistence
+- [x] Laravel + Flutter tests + manual API verification
 
 ---
 
-## Phase 5 — Community
+## Phase 3 — Training system (COMPLETE)
 
-1. Posts, comments, likes
-2. Pagination
-3. Own-post delete
-4. Admin moderation basics
-5. Tests
+- [x] Categories / exercises / videos migrations + models
+- [x] Seed 7 bodybuilding + 7 MMA demo items (placeholder videos)
+- [x] Authenticated read APIs + filters/search
+- [x] Flutter Training home, lists, details, video placeholder UI
+- [x] Localization AR/EN + tests
 
-**Exit criteria:** Create / like / comment / delete own post.
+**STOP** — wait for explicit Phase 4 instruction (Store).
+
+---
+
+## Phase 4 — E-commerce (demo checkout) (COMPLETE)
+
+- [x] Product categories, products, carts, cart_items, orders, order_items
+- [x] COD / demo checkout only (no payment gateway)
+- [x] Order history + status + stock management
+- [x] Flutter store screens (browse, cart, checkout, orders) AR/EN
+- [x] Laravel + Flutter tests + manual API verification
+
+**STOP** — wait for explicit Phase 5 instruction (Community).
+
+---
+
+## Phase 5 — Community (COMPLETE)
+
+- [x] Posts / likes / comments migrations + models + policies
+- [x] Feed pagination, create/edit/delete own posts
+- [x] Like/unlike with unique constraint
+- [x] Comments create + delete own
+- [x] Flutter community screens AR/EN
+- [x] Laravel + Flutter tests + manual API verification
+
+**STOP** — wait for explicit Phase 6 instruction.
+
+---
+
+## Phase 6 — AI Sports Coach (COMPLETE)
+
+- [x] FastAPI `/chat` + mock/optional provider
+- [x] Laravel conversations/messages + gateway to Coach service
+- [x] Ownership policies + rate limiting
+- [x] Flutter conversation list + chat UI (AR/EN)
+- [x] Tests (Laravel / Flutter / FastAPI) + manual API verification
+
+**STOP** — wait for explicit Phase 7 instruction.
+
+---
+
+## Phase 7 — AI Physiotherapist (COMPLETE)
+
+- [x] FastAPI `/assess` + `/chat` + mock provider + red-flag heuristic
+- [x] Laravel `physio_assessments` / `physio_messages` + PhysioService gateway
+- [x] Ownership policies + rate limiting
+- [x] Flutter assessment form + result + follow-up (AR/EN)
+- [x] Tests (Laravel / Flutter / FastAPI) + manual API verification
+
+**STOP** — wait for explicit Phase 8 instruction. Do not start Motion Analyzer.
+
+---
+
+## Phase 8 — Motion Analyzer (COMPLETE)
+
+- [x] FastAPI `/analyze` + mock/mediapipe providers + angle/rep modules
+- [x] Laravel `MotionService` + multipart gateway (no video DB storage)
+- [x] Flutter exercise select + video picker + results (AR/EN)
+- [x] Tests (Laravel / Flutter / FastAPI) + manual API verification
+
+**STOP** — wait for explicit Phase 9 instruction. Do not start Admin polish automatically.
+
+---
+
+## Phase 9 — Admin Dashboard (COMPLETE)
+
+- [x] Admin API (`role:admin`) for dashboard, users, training, store, orders, community, settings
+- [x] Last-admin protection + safe settings (no secrets)
+- [x] Flutter admin screens + route guard (UI convenience; Laravel enforces authz)
+- [x] Tests + manual API verification
+
+**STOP** — wait for explicit Phase 10 instruction.
+
+---
+
+## Phase 10+ — Future (NOT STARTED)
+
+Hardening / graduation demo pack — only when explicitly requested.
+
+Do not auto-advance.
+
+---
+
+## Historical notes (earlier plan numbering)
+
+Older drafts labeled Coach as “Phase 7” and Physio as “Phase 8”. The active project phases are:
+
+- Phase 6 = AI Sports Coach  
+- Phase 7 = AI Physiotherapist  
+- Phase 8 = Motion Analyzer  
+- Phase 9 = Admin Dashboard  
+- Phase 10+ = Hardening / demo pack
 
 ---
 
@@ -90,32 +153,9 @@
 
 ---
 
-## Phase 7 — AI Coach service
+## Phase 10 — Motion Analyzer notes (historical draft numbering)
 
-1. Scaffold `ai/coach` FastAPI
-2. Controlled knowledge base files
-3. Laravel proxy endpoints (keys stay server-side)
-4. Conversation persistence tables
-5. Flutter Coach UI
-6. Tests: health + sample Q&A
-
-**Exit criteria:** Ask program/nutrition question in AR and EN via app.
-
----
-
-## Phase 8 — AI Physiotherapist
-
-1. Scaffold `ai/physiotherapist`
-2. Symptom intake schema + red-flag rules
-3. Risk tiers: educational / professional / urgent
-4. Laravel gateway + Flutter UI + disclaimers
-5. Tests for red-flag path
-
-**Exit criteria:** Demo assessment + urgent recommendation path.
-
----
-
-## Phase 9 — Motion Analyzer
+Motion Analyzer was delivered as **Phase 8** in the active plan.
 
 1. Scaffold `ai/motion_analyzer`
 2. Support squat, push-up, biceps curl (demo)

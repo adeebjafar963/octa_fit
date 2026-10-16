@@ -1,84 +1,85 @@
 # OCTA FIT
 
-Graduation-project mobile fitness platform: **Bodybuilding**, **MMA**, **training videos**, **sports store**, **AI Coach**, **AI Physiotherapist**, **Motion Analyzer**, **community**, and a **Laravel admin dashboard**.
+Graduation fitness platform — **Phase 10 complete** (integration, hardening, demo readiness).
 
-**Canonical workspace:** `E:\OCTA_FIT`
+**Root:** `E:\OCTA_FIT`
 
-**Principle:** polished + simple + complete + demonstrable — not an enterprise platform.
+## What it is
 
----
+OCTA FIT combines training content, a demo e-commerce store, a community feed, and three educational AI assistants (Coach, Physiotherapist guidance, Motion Analyzer), plus an admin dashboard. It is an academic graduation project — not a medical device or production payment system.
 
-## Status (Phase 1)
+## Demo accounts
 
-Architecture and documentation established. Feature implementation has **not** started yet. Await explicit Phase 2 instruction before scaffolding apps or writing business code.
+- User: `demo@octafit.test` / `Demo123!`
+- Admin: `admin@octafit.test` / `Admin123!`
 
----
+## Quick start
 
-## Repository layout
+```powershell
+cd E:\OCTA_FIT\backend
+E:\OCTA_FIT\tools\php83\php.exe artisan migrate --seed
+E:\OCTA_FIT\tools\php83\php.exe artisan serve --host=127.0.0.1 --port=8000
+
+# AI services (mock defaults — see ai/*/README.md):
+# Coach :8001  Physio :8002  Motion :8003
+
+cd E:\OCTA_FIT\mobile
+flutter pub get
+flutter run -d windows
+# Android emulator (optional): --dart-define=API_BASE_URL=http://10.0.2.2:8000
+```
+
+Windows Desktop is the supported local demo target (`mobile/windows`).
+
+## Architecture (summary)
 
 ```
-E:\OCTA_FIT
-├── mobile/                 # Flutter app (Clean Architecture + Cubit)
-├── backend/                # Laravel REST API + admin dashboard
-├── ai/
-│   ├── coach/              # FastAPI AI Sports Coach
-│   ├── physiotherapist/    # FastAPI AI Physiotherapist
-│   └── motion_analyzer/    # FastAPI + MediaPipe Motion Analyzer
-├── docs/                   # Architecture & setup docs
-├── scripts/                # Windows PowerShell helpers
-├── tools/                  # Local helper binaries (Composer PHAR, etc.)
-└── README.md
+Flutter (Clean Architecture + Cubit + GoRouter + easy_localization)
+   │ Sanctum Bearer (flutter_secure_storage)
+   ▼
+Laravel API :8000
+   ├─ auth:sanctum user routes
+   ├─ role:admin admin routes
+   ├─ feature:* gates for AI modules
+   └─ proxies → FastAPI Coach/Physio/Motion
 ```
 
----
+## Phases
 
-## Planned stack
-
-| Layer | Technology |
-|-------|------------|
-| Mobile | Flutter, Cubit, Dio, GetIt, GoRouter, easy_localization |
-| API | Laravel + Sanctum + MySQL/MariaDB |
-| Admin | Laravel Blade (simple responsive dashboard) |
-| AI Coach | Python FastAPI + controlled knowledge base |
-| AI Physio | Python FastAPI + rules/knowledge |
-| Motion | Python FastAPI + OpenCV + MediaPipe Pose |
-| Auth | Sanctum tokens (user + admin roles) |
-
----
+| Phase | Status |
+|-------|--------|
+| 1–9 Foundation → Admin | Done |
+| **10 Final integration & graduation readiness** | **Done** |
+| 11+ | Not started |
 
 ## Documentation
 
-| Document | Purpose |
-|----------|---------|
-| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | System design & layers |
-| [docs/DATABASE.md](docs/DATABASE.md) | Schema & relationships |
-| [docs/API.md](docs/API.md) | REST API outline |
-| [docs/SETUP.md](docs/SETUP.md) | Windows setup (after Phase 2+) |
-| [docs/AI.md](docs/AI.md) | AI services design |
-| [docs/TESTING.md](docs/TESTING.md) | Test strategy |
+| Doc | Purpose |
+|-----|---------|
+| [docs/SETUP.md](docs/SETUP.md) | Environment setup |
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | System design |
+| [docs/API.md](docs/API.md) | API overview |
 | [docs/GRADUATION_DEMO.md](docs/GRADUATION_DEMO.md) | Defense demo script |
-| [docs/IMPLEMENTATION_PLAN.md](docs/IMPLEMENTATION_PLAN.md) | Phased development plan |
-| [docs/MACHINE_INSPECTION.md](docs/MACHINE_INSPECTION.md) | Detected toolchain (Phase 1) |
+| [docs/KNOWN_LIMITATIONS.md](docs/KNOWN_LIMITATIONS.md) | Honest scope limits |
+| [docs/SAFETY.md](docs/SAFETY.md) | AI / medical disclaimers |
 
----
+## Tests
 
-## Languages
+```powershell
+cd E:\OCTA_FIT\mobile
+flutter analyze
+flutter test
 
-- Arabic (RTL) and English (LTR)
-- Switchable from Settings
-- Flutter: `easy_localization` — no hardcoded UI strings in widgets
+cd E:\OCTA_FIT\backend
+E:\OCTA_FIT\tools\php83\php.exe artisan test
 
----
+# Python (from each service folder with venv active):
+# pytest
+```
 
 ## Security notes
 
-- No API keys in Flutter
-- Secrets only in server `.env` files
-- Commit `.env.example` only
-- Passwords hashed via Laravel
-
----
-
-## Next step
-
-Wait for **Phase 2** instruction (typically: install missing tools → scaffold Laravel backend → database migrations foundation).
+- Tokens never logged or shown in UI
+- AI provider keys only on server / Python env
+- Admin settings allowlist rejects secrets
+- Feature toggles hide UI **and** gate Laravel routes (UI is not security)

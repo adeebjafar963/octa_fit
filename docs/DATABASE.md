@@ -1,120 +1,227 @@
-# Database architecture
+# Database — Phases 1–4
 
-**Engine:** MySQL-compatible (MariaDB 10.4 via XAMPP is acceptable for development).  
-**Database name (planned):** `octafit`  
-**Conventions:** snake_case tables, `id` PK bigint, `timestamps`, soft deletes where content may be restored, FKs with indexes.
+## Phase 1–2 tables
 
----
+`users`, `roles`, `profiles`, `settings`, Sanctum tokens, Laravel infra tables.
 
-## Entity relationship (logical)
+## Phase 3 training tables
+
+### `training_categories`
+
+| Column | Notes |
+|--------|-------|
+| name_en / name_ar | Bilingual titles |
+| slug | Unique (`bodybuilding`, `mma`) |
+| type | `bodybuilding` \| `mma` |
+| description_en / description_ar | Optional |
+| is_active, sort_order | Visibility + ordering |
+
+### `exercises`
+
+| Column | Notes |
+|--------|-------|
+| training_category_id | FK → categories |
+| name_*/description_*/instructions_*/safety_notes_* | Bilingual content |
+| difficulty | `beginner` \| `intermediate` \| `advanced` |
+| thumbnail_url, target | Optional |
+| is_active, is_demo, sort_order | Demo flag for graduation content |
+
+### `exercise_videos`
+
+| Column | Notes |
+|--------|-------|
+| exercise_id | FK → exercises |
+| title_en / title_ar | Bilingual |
+| video_url | Configurable; seeded as placeholders |
+| is_placeholder | `true` for demo URLs |
+| duration_seconds, thumbnail_url, is_active, sort_order | Optional metadata |
+
+## Relationships (training)
+
+`TrainingCategory` 1—* `Exercise` 1—* `ExerciseVideo`
+
+## Seed volume (training)
+
+- 2 categories
+- 7 bodybuilding exercises + 7 videos
+- 7 MMA techniques + 7 videos
+
+## Phase 4 store tables
+
+### `product_categories`
+
+| Column | Notes |
+|--------|-------|
+| name_en / name_ar | Bilingual |
+| slug | Unique |
+| description_en / description_ar | Nullable |
+| image_url | Nullable placeholder |
+| is_active | Indexed |
+| sort_order | Ordering |
+
+### `products`
+
+| Column | Notes |
+|--------|-------|
+| category_id | FK → product_categories |
+| name_en / name_ar / slug | Unique slug |
+| description_* | Nullable bilingual |
+| price | Decimal ≥ 0 |
+| compare_at_price | Nullable |
+| stock_quantity | Integer ≥ 0 |
+| image_url, sku | Optional |
+| is_active, is_demo, sort_order | Demo catalog flags |
+
+No product variants in Phase 4.
+
+### `carts`
+
+| Column | Notes |
+|--------|-------|
+| user_id | Unique — one cart per user |
+
+### `cart_items`
+
+| Column | Notes |
+|--------|-------|
+| cart_id, product_id | Unique pair |
+| quantity | > 0; must not exceed stock |
+| unit_price | Snapshot of price when added/updated |
+
+### `orders`
+
+| Column | Notes |
+|--------|-------|
+| user_id | FK → users |
+| order_number | Unique (`OCTA-YYYYMMDD-####`) |
+| status | pending / confirmed / processing / completed / cancelled |
+| payment_method | `cash_on_delivery` \| `demo` |
+| subtotal, total | Server-calculated; Phase 4: `total = subtotal` |
+| notes | Nullable |
+
+### `order_items`
+
+| Column | Notes |
+|--------|-------|
+| order_id | FK → orders |
+| product_id | Nullable FK (product may later be removed) |
+| product_name_en / product_name_ar | Name snapshots |
+| quantity, unit_price, line_total | Price snapshots |
+
+## Relationships (store)
 
 ```
-roles ──< users >── profiles
-                │
-                ├── community_posts ──< community_comments
-                │                 └──< community_likes
-                ├── orders ──< order_items >── products >── product_categories
-                ├── ai_conversations ──< ai_messages
-                ├── physio_assessments
-                └── motion_analysis_results >── motion_exercises
-
-training_categories ──< exercises ──< exercise_videos
-settings (key/value app config)
-ai_knowledge_articles (optional DB mirror of coach KB for admin editing)
-physio_content (optional educational content for admin)
+ProductCategory 1—* Product
+User 1—1 Cart 1—* CartItem *—1 Product
+User 1—* Order 1—* OrderItem *—0..1 Product
 ```
 
----
+## Seed volume (store)
 
-## Tables (minimum)
+- 4 categories: Supplements, Sportswear, Equipment, Accessories
+- 15 demo products (idempotent `updateOrCreate` by slug)
 
-### Identity
+## Phase 5 community tables
 
-| Table | Purpose |
-|-------|---------|
-| `roles` | `admin`, `user` |
-| `users` | auth identity, email unique, password hash, role_id or pivot |
-| `profiles` | avatar, age, gender, height, weight, training_goal, locale preference |
-| `personal_access_tokens` | Sanctum |
+### `posts`
 
-### Training
+| Column | Notes |
+|--------|-------|
+| user_id | FK → users (cascade delete) |
+| content | Required, max 1000 |
+| image_url | Nullable (optional; no cloud upload in Phase 5) |
+| is_published | Default true |
+| indexes | user_id, created_at, is_published |
 
-| Table | Purpose |
-|-------|---------|
-| `training_categories` | Bodybuilding / MMA (+ subcategories if needed) |
-| `exercises` | bilingual titles/descriptions, difficulty, target muscle / technique type, instructions, safety notes |
-| `exercise_videos` | video_url, thumbnail_url, sort order, linked exercise |
+### `post_likes`
 
-Suggested exercise fields: `title_ar`, `title_en`, `description_ar`, `description_en`, `instructions_ar`, `instructions_en`, `safety_notes_ar`, `safety_notes_en`, `difficulty`, `target`, `is_demo`, `is_active`.
+| Column | Notes |
+|--------|-------|
+| post_id, user_id | FKs with cascade |
+| unique | `(post_id, user_id)` prevents duplicate likes |
 
-### Commerce
+### `comments`
 
-| Table | Purpose |
-|-------|---------|
-| `product_categories` | clothing, gloves, equipment, … |
-| `products` | bilingual name/description, price, stock, image, is_active |
-| `orders` | user_id, status, total, payment_method=`cod_demo`, notes |
-| `order_items` | order_id, product_id, qty, unit_price |
+| Column | Notes |
+|--------|-------|
+| post_id, user_id | FKs with cascade |
+| content | Required, max 500 |
+| indexes | post_id, user_id, created_at |
 
-Cart: prefer **client cart + create order on checkout** for simplicity (graduation). Optional `carts`/`cart_items` only if needed.
+One-level comments only (no nested replies).
 
-Order statuses (simple): `pending`, `confirmed`, `cancelled`, `completed`.
+## Relationships (community)
 
-### Community
+```
+User 1—* Post 1—* Comment
+User 1—* PostLike *—1 Post
+User 1—* Comment
+```
 
-| Table | Purpose |
-|-------|---------|
-| `community_posts` | user_id, body, optional image path, soft deletes |
-| `community_comments` | post_id, user_id, body |
-| `community_likes` | unique(post_id, user_id) |
+Deleting a post cascades likes and comments via foreign keys.
 
-### AI persistence
+## Seed volume (community)
 
-| Table | Purpose |
-|-------|---------|
-| `ai_conversations` | user_id, type=`coach`, locale |
-| `ai_messages` | conversation_id, role, content |
-| `physio_assessments` | user inputs JSON, risk_level, response summary, red_flags |
-| `motion_exercises` | squat / push_up / biceps_curl definitions |
-| `motion_analysis_results` | user_id, exercise_id, metrics JSON, feedback JSON |
+- Extra demo users: Sara, Omar, Layla (+ existing demo user)
+- ~10 posts, ~15 comments, ~20 likes
 
-### Content / settings (admin-editable)
+## Phase 6 coach tables
 
-| Table | Purpose |
-|-------|---------|
-| `settings` | key, value (JSON/string), group |
-| `ai_knowledge_articles` | bilingual coach KB entries (demo-marked) |
-| `physio_content` | educational physio snippets |
+### `coach_conversations`
 
----
+| Column | Notes |
+|--------|-------|
+| user_id | FK → users (cascade) |
+| title | Nullable; auto-filled from first message |
+| indexes | `(user_id, updated_at)` |
 
-## Seed strategy
+### `coach_messages`
 
-Small, presentation-friendly:
+| Column | Notes |
+|--------|-------|
+| conversation_id | FK → coach_conversations (cascade) |
+| role | `user` \| `assistant` |
+| content | Text |
+| indexes | `(conversation_id, created_at)` |
 
-- 1 admin + 1 demo user (documented passwords in SETUP — not production secrets)
-- ~6–7 bodybuilding exercises/videos
-- ~6–7 MMA techniques/videos
-- ~6–10 products across few categories
-- ~3–5 community posts with comments/likes
-- Motion exercises: squat, push-up, biceps curl
-- AI knowledge articles clearly labeled **demonstration/sample**
+No API keys are stored in the database.
 
-No hundreds of fake rows.
+## Phase 7 physio tables
 
----
+### `physio_assessments`
 
-## Indexing notes
+| Column | Notes |
+|--------|-------|
+| user_id | FK → users (cascade) |
+| body_area | e.g. knee, lower_back |
+| symptoms | Text (max 2000 via API) |
+| pain_level | Nullable 0–10 |
+| duration / onset / trigger / activity / additional_information | Nullable |
+| risk_level | Nullable `low\|moderate\|high\|urgent` |
+| requires_urgent_care | Boolean |
+| result_payload | JSON structured guidance |
+| indexes | `(user_id, updated_at)`, `(user_id, risk_level)` |
 
-- FK columns indexed
-- `users.email` unique
-- `community_likes (post_id, user_id)` unique
-- `products` / `exercises` filtered by `is_active`
-- Orders listed by `user_id`, `created_at`
+### `physio_messages`
 
----
+| Column | Notes |
+|--------|-------|
+| assessment_id | FK → physio_assessments (cascade) |
+| role | `user` \| `assistant` |
+| content | Text |
+| indexes | `(assessment_id, created_at)` |
 
-## Soft deletes
+See [DATABASE_SETUP.md](DATABASE_SETUP.md) for migrate/seed commands.
 
-Recommended on: `users` (careful), `exercises`, `products`, `community_posts`, knowledge articles.  
-Prefer hard delete or cascade for likes/comments when parent is removed, or soft-delete comments with posts.
+## Phase 8 Motion Analyzer
+
+No dedicated Motion Analyzer tables. Analysis is request/response only.
+
+Raw video files are **not** stored in MySQL. Temporary files on the FastAPI host are deleted after processing.
+
+## Phase 9 Admin
+
+No new admin tables required. Admin APIs reuse existing entities and the `settings` table (allowlisted keys only).
+
+
+

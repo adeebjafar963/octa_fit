@@ -1,0 +1,462 @@
+[
+  {
+    "slug": "bb-chest-barbell-bench-press",
+    "category": "bb-chest",
+    "file": "assets/exercises/bodybuilding/chest/bb_chest_barbell_bench_press.gif"
+  },
+  {
+    "slug": "bb-chest-incline-barbell-bench-press",
+    "category": "bb-chest",
+    "file": "assets/exercises/bodybuilding/chest/bb_chest_incline_barbell_bench_press.gif"
+  },
+  {
+    "slug": "bb-chest-incline-dumbbell-press",
+    "category": "bb-chest",
+    "file": "assets/exercises/bodybuilding/chest/bb_chest_incline_dumbbell_press.gif"
+  },
+  {
+    "slug": "bb-chest-flat-dumbbell-press",
+    "category": "bb-chest",
+    "file": "assets/exercises/bodybuilding/chest/bb_chest_flat_dumbbell_press.gif"
+  },
+  {
+    "slug": "bb-chest-machine-chest-press",
+    "category": "bb-chest",
+    "file": "assets/exercises/bodybuilding/chest/bb_chest_machine_chest_press.gif"
+  },
+  {
+    "slug": "bb-chest-cable-chest-fly",
+    "category": "bb-chest",
+    "file": "assets/exercises/bodybuilding/chest/bb_chest_cable_chest_fly.gif"
+  },
+  {
+    "slug": "bb-chest-pec-deck-machine-fly",
+    "category": "bb-chest",
+    "file": "assets/exercises/bodybuilding/chest/bb_chest_pec_deck_machine_fly.gif"
+  },
+  {
+    "slug": "bb-chest-weighted-chest-dip",
+    "category": "bb-chest",
+    "file": "assets/exercises/bodybuilding/chest/bb_chest_weighted_chest_dip.gif"
+  },
+  {
+    "slug": "bb-chest-push-up",
+    "category": "bb-chest",
+    "file": "assets/exercises/bodybuilding/chest/bb_chest_push_up.gif"
+  },
+  {
+    "slug": "bb-back-conventional-deadlift",
+    "category": "bb-back",
+    "file": "assets/exercises/bodybuilding/back/bb_back_conventional_deadlift.gif"
+  },
+  {
+    "slug": "bb-back-pull-up",
+    "category": "bb-back",
+    "file": "assets/exercises/bodybuilding/back/bb_back_pull_up.gif"
+  },
+  {
+    "slug": "bb-back-lat-pulldown",
+    "category": "bb-back",
+    "file": "assets/exercises/bodybuilding/back/bb_back_lat_pulldown.gif"
+  },
+  {
+    "slug": "bb-back-barbell-bent-over-row",
+    "category": "bb-back",
+    "file": "assets/exercises/bodybuilding/back/bb_back_barbell_bent_over_row.gif"
+  },
+  {
+    "slug": "bb-back-one-arm-dumbbell-row",
+    "category": "bb-back",
+    "file": "assets/exercises/bodybuilding/back/bb_back_one_arm_dumbbell_row.gif"
+  },
+  {
+    "slug": "bb-back-seated-cable-row",
+    "category": "bb-back",
+    "file": "assets/exercises/bodybuilding/back/bb_back_seated_cable_row.gif"
+  },
+  {
+    "slug": "bb-back-chest-supported-t-bar-row",
+    "category": "bb-back",
+    "file": "assets/exercises/bodybuilding/back/bb_back_chest_supported_t_bar_row.gif"
+  },
+  {
+    "slug": "bb-back-straight-arm-pulldown",
+    "category": "bb-back",
+    "file": "assets/exercises/bodybuilding/back/bb_back_straight_arm_pulldown.gif"
+  },
+  {
+    "slug": "bb-back-barbell-shrug",
+    "category": "bb-back",
+    "file": "assets/exercises/bodybuilding/back/bb_back_barbell_shrug.gif"
+  },
+  {
+    "slug": "bb-shoulders-standing-overhead-press",
+    "category": "bb-shoulders",
+    "file": "assets/exercises/bodybuilding/shoulders/bb_shoulders_standing_overhead_press.gif"
+  },
+  {
+    "slug": "bb-shoulders-seated-dumbbell-shoulder-press",
+    "category": "bb-shoulders",
+    "file": "assets/exercises/bodybuilding/shoulders/bb_shoulders_seated_dumbbell_shoulder_press.gif"
+  },
+  {
+    "slug": "bb-shoulders-dumbbell-lateral-raise",
+    "category": "bb-shoulders",
+    "file": "assets/exercises/bodybuilding/shoulders/bb_shoulders_dumbbell_lateral_raise.gif"
+  },
+  {
+    "slug": "bb-shoulders-cable-lateral-raise",
+    "category": "bb-shoulders",
+    "file": "assets/exercises/bodybuilding/shoulders/bb_shoulders_cable_lateral_raise.gif"
+  },
+  {
+    "slug": "bb-shoulders-reverse-pec-deck-fly",
+    "category": "bb-shoulders",
+    "file": "assets/exercises/bodybuilding/shoulders/bb_shoulders_reverse_pec_deck_fly.gif"
+  },
+  {
+    "slug": "bb-shoulders-cable-face-pull",
+    "category": "bb-shoulders",
+    "file": "assets/exercises/bodybuilding/shoulders/bb_shoulders_cable_face_pull.gif"
+  },
+  {
+    "slug": "bb-shoulders-arnold-press",
+    "category": "bb-shoulders",
+    "file": "assets/exercises/bodybuilding/shoulders/bb_shoulders_arnold_press.gif"
+  },
+  {
+    "slug": "bb-shoulders-landmine-press",
+    "category": "bb-shoulders",
+    "file": "assets/exercises/bodybuilding/shoulders/bb_shoulders_landmine_press.gif"
+  },
+  {
+    "slug": "bb-biceps-barbell-curl",
+    "category": "bb-biceps",
+    "file": "assets/exercises/bodybuilding/biceps/bb_biceps_barbell_curl.gif"
+  },
+  {
+    "slug": "bb-biceps-ez-bar-curl",
+    "category": "bb-biceps",
+    "file": "assets/exercises/bodybuilding/biceps/bb_biceps_ez_bar_curl.gif"
+  },
+  {
+    "slug": "bb-biceps-incline-dumbbell-curl",
+    "category": "bb-biceps",
+    "file": "assets/exercises/bodybuilding/biceps/bb_biceps_incline_dumbbell_curl.gif"
+  },
+  {
+    "slug": "bb-biceps-hammer-curl",
+    "category": "bb-biceps",
+    "file": "assets/exercises/bodybuilding/biceps/bb_biceps_hammer_curl.gif"
+  },
+  {
+    "slug": "bb-biceps-cable-curl",
+    "category": "bb-biceps",
+    "file": "assets/exercises/bodybuilding/biceps/bb_biceps_cable_curl.gif"
+  },
+  {
+    "slug": "bb-biceps-preacher-curl",
+    "category": "bb-biceps",
+    "file": "assets/exercises/bodybuilding/biceps/bb_biceps_preacher_curl.gif"
+  },
+  {
+    "slug": "bb-biceps-chin-up",
+    "category": "bb-biceps",
+    "file": "assets/exercises/bodybuilding/biceps/bb_biceps_chin_up.gif"
+  },
+  {
+    "slug": "bb-triceps-close-grip-bench-press",
+    "category": "bb-triceps",
+    "file": "assets/exercises/bodybuilding/triceps/bb_triceps_close_grip_bench_press.gif"
+  },
+  {
+    "slug": "bb-triceps-triceps-rope-pushdown",
+    "category": "bb-triceps",
+    "file": "assets/exercises/bodybuilding/triceps/bb_triceps_triceps_rope_pushdown.gif"
+  },
+  {
+    "slug": "bb-triceps-overhead-cable-triceps-extension",
+    "category": "bb-triceps",
+    "file": "assets/exercises/bodybuilding/triceps/bb_triceps_overhead_cable_triceps_extension.gif"
+  },
+  {
+    "slug": "bb-triceps-lying-triceps-extension-skull-crusher",
+    "category": "bb-triceps",
+    "file": "assets/exercises/bodybuilding/triceps/bb_triceps_lying_triceps_extension_skull_crusher.gif"
+  },
+  {
+    "slug": "bb-triceps-dumbbell-overhead-extension",
+    "category": "bb-triceps",
+    "file": "assets/exercises/bodybuilding/triceps/bb_triceps_dumbbell_overhead_extension.gif"
+  },
+  {
+    "slug": "bb-triceps-parallel-bar-dip",
+    "category": "bb-triceps",
+    "file": "assets/exercises/bodybuilding/triceps/bb_triceps_parallel_bar_dip.gif"
+  },
+  {
+    "slug": "bb-triceps-bench-dip",
+    "category": "bb-triceps",
+    "file": "assets/exercises/bodybuilding/triceps/bb_triceps_bench_dip.gif"
+  },
+  {
+    "slug": "bb-forearms-barbell-wrist-curl",
+    "category": "bb-forearms",
+    "file": "assets/exercises/bodybuilding/forearms/bb_forearms_barbell_wrist_curl.gif"
+  },
+  {
+    "slug": "bb-forearms-barbell-reverse-wrist-curl",
+    "category": "bb-forearms",
+    "file": "assets/exercises/bodybuilding/forearms/bb_forearms_barbell_reverse_wrist_curl.gif"
+  },
+  {
+    "slug": "bb-forearms-reverse-curl",
+    "category": "bb-forearms",
+    "file": "assets/exercises/bodybuilding/forearms/bb_forearms_reverse_curl.gif"
+  },
+  {
+    "slug": "bb-forearms-farmers-carry",
+    "category": "bb-forearms",
+    "file": "assets/exercises/bodybuilding/forearms/bb_forearms_farmers_carry.gif"
+  },
+  {
+    "slug": "bb-forearms-dead-hang",
+    "category": "bb-forearms",
+    "file": "assets/exercises/bodybuilding/forearms/bb_forearms_dead_hang.gif"
+  },
+  {
+    "slug": "bb-forearms-plate-pinch-hold",
+    "category": "bb-forearms",
+    "file": "assets/exercises/bodybuilding/forearms/bb_forearms_plate_pinch_hold.gif"
+  },
+  {
+    "slug": "bb-quads-barbell-back-squat",
+    "category": "bb-quads",
+    "file": "assets/exercises/bodybuilding/quads/bb_quads_barbell_back_squat.gif"
+  },
+  {
+    "slug": "bb-quads-front-squat",
+    "category": "bb-quads",
+    "file": "assets/exercises/bodybuilding/quads/bb_quads_front_squat.gif"
+  },
+  {
+    "slug": "bb-quads-leg-press",
+    "category": "bb-quads",
+    "file": "assets/exercises/bodybuilding/quads/bb_quads_leg_press.gif"
+  },
+  {
+    "slug": "bb-quads-hack-squat",
+    "category": "bb-quads",
+    "file": "assets/exercises/bodybuilding/quads/bb_quads_hack_squat.gif"
+  },
+  {
+    "slug": "bb-quads-bulgarian-split-squat",
+    "category": "bb-quads",
+    "file": "assets/exercises/bodybuilding/quads/bb_quads_bulgarian_split_squat.gif"
+  },
+  {
+    "slug": "bb-quads-walking-lunge",
+    "category": "bb-quads",
+    "file": "assets/exercises/bodybuilding/quads/bb_quads_walking_lunge.gif"
+  },
+  {
+    "slug": "bb-quads-leg-extension",
+    "category": "bb-quads",
+    "file": "assets/exercises/bodybuilding/quads/bb_quads_leg_extension.gif"
+  },
+  {
+    "slug": "bb-quads-goblet-squat",
+    "category": "bb-quads",
+    "file": "assets/exercises/bodybuilding/quads/bb_quads_goblet_squat.gif"
+  },
+  {
+    "slug": "bb-hamstrings-romanian-deadlift",
+    "category": "bb-hamstrings",
+    "file": "assets/exercises/bodybuilding/hamstrings/bb_hamstrings_romanian_deadlift.gif"
+  },
+  {
+    "slug": "bb-hamstrings-lying-leg-curl",
+    "category": "bb-hamstrings",
+    "file": "assets/exercises/bodybuilding/hamstrings/bb_hamstrings_lying_leg_curl.gif"
+  },
+  {
+    "slug": "bb-hamstrings-seated-leg-curl",
+    "category": "bb-hamstrings",
+    "file": "assets/exercises/bodybuilding/hamstrings/bb_hamstrings_seated_leg_curl.gif"
+  },
+  {
+    "slug": "bb-hamstrings-stiff-leg-dumbbell-deadlift",
+    "category": "bb-hamstrings",
+    "file": "assets/exercises/bodybuilding/hamstrings/bb_hamstrings_stiff_leg_dumbbell_deadlift.gif"
+  },
+  {
+    "slug": "bb-hamstrings-barbell-good-morning",
+    "category": "bb-hamstrings",
+    "file": "assets/exercises/bodybuilding/hamstrings/bb_hamstrings_barbell_good_morning.gif"
+  },
+  {
+    "slug": "bb-hamstrings-nordic-hamstring-curl",
+    "category": "bb-hamstrings",
+    "file": "assets/exercises/bodybuilding/hamstrings/bb_hamstrings_nordic_hamstring_curl.gif"
+  },
+  {
+    "slug": "bb-hamstrings-single-leg-romanian-deadlift",
+    "category": "bb-hamstrings",
+    "file": "assets/exercises/bodybuilding/hamstrings/bb_hamstrings_single_leg_romanian_deadlift.gif"
+  },
+  {
+    "slug": "bb-hamstrings-45-degree-back-extension",
+    "category": "bb-hamstrings",
+    "file": "assets/exercises/bodybuilding/hamstrings/bb_hamstrings_45_degree_back_extension.gif"
+  },
+  {
+    "slug": "bb-glutes-barbell-hip-thrust",
+    "category": "bb-glutes",
+    "file": "assets/exercises/bodybuilding/glutes/bb_glutes_barbell_hip_thrust.gif"
+  },
+  {
+    "slug": "bb-glutes-glute-bridge",
+    "category": "bb-glutes",
+    "file": "assets/exercises/bodybuilding/glutes/bb_glutes_glute_bridge.gif"
+  },
+  {
+    "slug": "bb-glutes-sumo-deadlift",
+    "category": "bb-glutes",
+    "file": "assets/exercises/bodybuilding/glutes/bb_glutes_sumo_deadlift.gif"
+  },
+  {
+    "slug": "bb-glutes-dumbbell-step-up",
+    "category": "bb-glutes",
+    "file": "assets/exercises/bodybuilding/glutes/bb_glutes_dumbbell_step_up.gif"
+  },
+  {
+    "slug": "bb-glutes-cable-glute-kickback",
+    "category": "bb-glutes",
+    "file": "assets/exercises/bodybuilding/glutes/bb_glutes_cable_glute_kickback.gif"
+  },
+  {
+    "slug": "bb-glutes-hip-abduction-machine",
+    "category": "bb-glutes",
+    "file": "assets/exercises/bodybuilding/glutes/bb_glutes_hip_abduction_machine.gif"
+  },
+  {
+    "slug": "bb-glutes-dumbbell-reverse-lunge",
+    "category": "bb-glutes",
+    "file": "assets/exercises/bodybuilding/glutes/bb_glutes_dumbbell_reverse_lunge.gif"
+  },
+  {
+    "slug": "bb-glutes-banded-frog-pump",
+    "category": "bb-glutes",
+    "file": "assets/exercises/bodybuilding/glutes/bb_glutes_banded_frog_pump.gif"
+  },
+  {
+    "slug": "bb-calves-standing-calf-raise",
+    "category": "bb-calves",
+    "file": "assets/exercises/bodybuilding/calves/bb_calves_standing_calf_raise.gif"
+  },
+  {
+    "slug": "bb-calves-seated-calf-raise",
+    "category": "bb-calves",
+    "file": "assets/exercises/bodybuilding/calves/bb_calves_seated_calf_raise.gif"
+  },
+  {
+    "slug": "bb-calves-leg-press-calf-press",
+    "category": "bb-calves",
+    "file": "assets/exercises/bodybuilding/calves/bb_calves_leg_press_calf_press.gif"
+  },
+  {
+    "slug": "bb-calves-single-leg-dumbbell-calf-raise",
+    "category": "bb-calves",
+    "file": "assets/exercises/bodybuilding/calves/bb_calves_single_leg_dumbbell_calf_raise.gif"
+  },
+  {
+    "slug": "bb-calves-donkey-calf-raise",
+    "category": "bb-calves",
+    "file": "assets/exercises/bodybuilding/calves/bb_calves_donkey_calf_raise.gif"
+  },
+  {
+    "slug": "bb-calves-tibialis-raise",
+    "category": "bb-calves",
+    "file": "assets/exercises/bodybuilding/calves/bb_calves_tibialis_raise.gif"
+  },
+  {
+    "slug": "bb-core-hanging-leg-raise",
+    "category": "bb-core",
+    "file": "assets/exercises/bodybuilding/core/bb_core_hanging_leg_raise.gif"
+  },
+  {
+    "slug": "bb-core-cable-crunch",
+    "category": "bb-core",
+    "file": "assets/exercises/bodybuilding/core/bb_core_cable_crunch.gif"
+  },
+  {
+    "slug": "bb-core-plank",
+    "category": "bb-core",
+    "file": "assets/exercises/bodybuilding/core/bb_core_plank.gif"
+  },
+  {
+    "slug": "bb-core-side-plank",
+    "category": "bb-core",
+    "file": "assets/exercises/bodybuilding/core/bb_core_side_plank.gif"
+  },
+  {
+    "slug": "bb-core-ab-wheel-rollout",
+    "category": "bb-core",
+    "file": "assets/exercises/bodybuilding/core/bb_core_ab_wheel_rollout.gif"
+  },
+  {
+    "slug": "bb-core-pallof-press",
+    "category": "bb-core",
+    "file": "assets/exercises/bodybuilding/core/bb_core_pallof_press.gif"
+  },
+  {
+    "slug": "bb-core-weighted-decline-sit-up",
+    "category": "bb-core",
+    "file": "assets/exercises/bodybuilding/core/bb_core_weighted_decline_sit_up.gif"
+  },
+  {
+    "slug": "bb-core-dead-bug",
+    "category": "bb-core",
+    "file": "assets/exercises/bodybuilding/core/bb_core_dead_bug.gif"
+  },
+  {
+    "slug": "bb-full-body-trap-bar-deadlift",
+    "category": "bb-full-body",
+    "file": "assets/exercises/bodybuilding/full_body/bb_full_body_trap_bar_deadlift.gif"
+  },
+  {
+    "slug": "bb-full-body-barbell-power-clean",
+    "category": "bb-full-body",
+    "file": "assets/exercises/bodybuilding/full_body/bb_full_body_barbell_power_clean.gif"
+  },
+  {
+    "slug": "bb-full-body-barbell-thruster",
+    "category": "bb-full-body",
+    "file": "assets/exercises/bodybuilding/full_body/bb_full_body_barbell_thruster.gif"
+  },
+  {
+    "slug": "bb-full-body-dumbbell-snatch",
+    "category": "bb-full-body",
+    "file": "assets/exercises/bodybuilding/full_body/bb_full_body_dumbbell_snatch.gif"
+  },
+  {
+    "slug": "bb-full-body-kettlebell-swing",
+    "category": "bb-full-body",
+    "file": "assets/exercises/bodybuilding/full_body/bb_full_body_kettlebell_swing.gif"
+  },
+  {
+    "slug": "bb-full-body-dumbbell-renegade-row",
+    "category": "bb-full-body",
+    "file": "assets/exercises/bodybuilding/full_body/bb_full_body_dumbbell_renegade_row.gif"
+  },
+  {
+    "slug": "bb-full-body-sled-push",
+    "category": "bb-full-body",
+    "file": "assets/exercises/bodybuilding/full_body/bb_full_body_sled_push.gif"
+  },
+  {
+    "slug": "bb-full-body-burpee",
+    "category": "bb-full-body",
+    "file": "assets/exercises/bodybuilding/full_body/bb_full_body_burpee.gif"
+  }
+]

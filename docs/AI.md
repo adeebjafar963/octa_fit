@@ -4,131 +4,129 @@
 
 1. Flutter → Laravel → AI service  
 2. No provider API keys in the mobile app  
-3. Prefer **controlled knowledge base** answers for project-specific fitness content  
+3. Prefer **mock / controlled answers** for graduation demos  
 4. Clear non-medical / non-diagnostic disclaimers  
 5. Small demo scope over “full product” AI  
 
 ---
 
-## 1) AI Sports Coach — `ai/coach`
+## 1) AI Sports Coach — `ai/coach` (Phase 6 COMPLETE · Phase 11 in progress)
 
 **Stack:** Python 3.11, FastAPI, uvicorn, pydantic  
-**Knowledge:** markdown/JSON under `ai/coach/knowledge/` (and optional DB articles synced from admin)
+**Port:** `127.0.0.1:8001`
 
-### Topics covered (KB)
+### Phase 11
 
-Bodybuilding basics, hypertrophy, strength, fat loss, training principles, recovery, nutrition basics (protein/carbs/fats), hydration, MMA basics, beginner plans, exercise safety.
+See [`docs/AI_COACH_PHASE11.md`](AI_COACH_PHASE11.md).
 
-### Behavior
-
-- Answer in `ar` or `en` per request locale  
-- KB-first retrieval (simple embeddings or keyword/section retrieval for graduation simplicity)  
-- Optional LLM polish **only if** key configured; otherwise deterministic KB templates still work for demo  
-- Refuse medical diagnosis; distinguish fitness info vs medical advice  
-
-### Endpoints (service-local)
-
-- `GET /health`
-- `POST /ask` → `{ answer, sources[], locale, disclaimer }`
-
----
-
-## 2) AI Physiotherapist — `ai/physiotherapist`
-
-**Stack:** FastAPI + rule engine + educational knowledge snippets
-
-### Input
-
-Pain location, intensity, duration, mechanism, limitations, swelling, numbness, weakness, other symptoms.
-
-### Classification
-
-1. **General / low-risk educational guidance**  
-2. **Needs professional evaluation**  
-3. **Urgent medical attention**
-
-### Red flags (non-exhaustive)
-
-Sudden severe pain, major trauma, inability to use limb, severe swelling, deformity, loss of sensation, severe weakness, chest pain, breathing difficulty, loss of consciousness, etc.
-
-### Output
-
-- Risk level + explanation  
-- Conservative suggestions **only** for non-urgent educational cases  
-- Explicit “not a diagnosis” disclaimer  
-- Never provide dangerous treatment instructions  
+- **11A complete:** versioned `user_context` schema (`11a.1`) + FastAPI `CoachUserContext` parser.
+- **11B complete:** Laravel `CoachExerciseRetrievalService` grounds coach turns to real `exercises` rows; FastAPI receives `exercise_candidates` and may only return those IDs; Flutter parses `grounded_exercises` for `/training/exercises/:id`.
+- **11C complete:** deterministic `TrainingPlanEngine` (`11c.1`) builds grounded multi-day plans (hypertrophy/strength/fat-loss training/MMA/home); nutrition not in training plans.
+- **11D complete:** `foods` table + USDA-aligned fixtures; deterministic search/normalize/calculate (`11d.1`); coach nutrition lookup mode; FastAPI `ChatRequest.nutrition` pass-through; Flutter parses `nutrition` map (UI in 11G).
+- **11E complete:** preference persistence; Mifflin–St Jeor calorie + macro targets; meal-plan engine with allergy hard exclusions; versioned `nutrition_plans` (`11e.1`); FastAPI `nutrition_plan`; Flutter parses `nutritionPlan`.
+- **11G complete:** Coach chat structured cards (training/nutrition/meals/food/evidence), Open Exercise navigation, regenerate/replace prompts, EN/AR + RTL-aware layout, `url_launcher` for real source URLs only.
+- Phase 11H Coach memory (`11h.1`) and Phase 11I evaluation/reliability hardening are complete. AI Coach architecture 11A–11I is closed for feature work.
 
 ### Endpoints
 
 - `GET /health`
-- `POST /assess`
+- `POST /chat` → `{ success, message, provider, language }`
 
----
-
-## 3) Motion Analyzer — `ai/motion_analyzer`
-
-**Stack:** FastAPI, OpenCV, MediaPipe Pose, NumPy
-
-### Supported demo exercises (start)
-
-1. Squat  
-2. Push-up  
-3. Biceps curl  
-
-### Metrics (examples)
-
-Joint angles, rep count, ROM approximation, basic posture flags.
-
-### Feedback examples
-
-- Keep your back more neutral  
-- Knee angle outside recommended demo range  
-- Lower further  
-- Keep elbow closer to body  
-- Rep completed / uncertain analysis  
-
-### Claims boundary
-
-Computer-vision **demonstration** only — not medical or professional biomechanical diagnosis. If landmarks unreliable → say analysis is uncertain.
-
-### Endpoints
-
-- `GET /health`
-- `GET /exercises`
-- `POST /analyze` (video file or image sequence — decide in Phase 9 for simplest reliable demo)
-
----
-
-## Laravel gateway responsibilities
-
-- Authenticate user  
-- Validate payload  
-- Forward to correct service with internal timeout  
-- Persist conversations / assessments / results  
-- Map downstream failures to friendly API errors  
-- Strip/never forward secrets  
-
----
-
-## Environment (examples)
+### Providers
 
 ```env
-# Laravel
-AI_COACH_URL=http://127.0.0.1:8001
-AI_PHYSIO_URL=http://127.0.0.1:8002
-AI_MOTION_URL=http://127.0.0.1:8003
-AI_INTERNAL_TOKEN=change-me
-
-# Coach service
-OPENAI_API_KEY=           # optional
-COACH_MODE=kb_first
+COACH_PROVIDER=mock
+COACH_API_KEY=
+COACH_MODEL=gpt-4o-mini
 ```
+
+- `mock` — deterministic fitness answers (default; no API key)
+- `openai` — optional external LLM; falls back to mock on failure
+
+### Safety
+
+Not a doctor. No diagnosis, prescriptions, steroids, or unsafe dosing. Medical/injury questions get a safe redirect.
+
+### Laravel gateway
+
+`CoachService` authenticates users, stores conversations/messages, forwards recent context (last ~16 messages) to FastAPI, and persists assistant replies.
+
+`UserAiContextBuilder::forCoach` emits Phase 11A nested context (+ flat aliases).
+---
+
+## 2) AI Physiotherapist — `ai/physiotherapist` (Phase 7 COMPLETE)
+
+**Port:** `127.0.0.1:8002`
+
+The AI Physiotherapist is an **educational/project-level system** and is **not clinically validated** or intended to diagnose medical conditions.
+
+### Endpoints
+
+- `GET /health`
+- `POST /assess` — structured symptom intake → risk heuristic + guidance
+- `POST /chat` — follow-up with assessment snapshot + recent conversation
+
+### Providers
+
+```env
+PHYSIO_PROVIDER=mock
+PHYSIO_API_KEY=
+PHYSIO_MODEL=gpt-4o-mini
+```
+
+- `mock` — deterministic scenario responses (soreness, tightness, discomfort, red flags)
+- Optional external provider falls back to mock; never fabricates a confident diagnosis on failure
+
+### Risk heuristic (project-level, not clinical triage)
+
+| Level | Meaning |
+|-------|---------|
+| low | General self-care + monitoring |
+| moderate | Professional care if persistent/worsening |
+| high | Prompt professional assessment |
+| urgent | Seek urgent/emergency care (`requires_urgent_care=true`) |
+
+Language stays uncertain (“may be consistent with…”). No definitive diagnoses. No medication dosing.
+
+### Laravel gateway
+
+`PhysioService` stores assessments/messages, calls FastAPI, and persists structured `result_payload` + risk flags.
 
 ---
 
-## Testing (AI)
+## 3) Motion Analyzer — `ai/motion_analyzer` (Phase 8 COMPLETE)
 
-- Health checks always green when service up  
-- Coach: known KB question returns expected keywords  
-- Physio: red-flag fixture → urgent  
-- Motion: fixture pose/image → structured feedback without crash  
+**Port:** `127.0.0.1:8003`
+
+Educational computer-vision fitness feature — **not medical-grade** and not intended to diagnose injuries or medical conditions.
+
+### Endpoints
+
+- `GET /health`
+- `POST /analyze` — multipart `exercise` + `video`
+
+### Providers
+
+```env
+MOTION_PROVIDER=mock
+MAX_UPLOAD_MB=20
+```
+
+- `mock` — deterministic sample results per exercise (default)
+- `mediapipe` — OpenCV + MediaPipe pose when installed; fails gracefully otherwise
+
+### Supported exercises
+
+`squat`, `push_up`, `biceps_curl`, `shoulder_press`, `lunge`
+
+### Processing modules
+
+- `utils/geometry.py` — `calculate_angle(a, b, c)`
+- `exercises/config.py` — centralized thresholds
+- `exercises/repetition.py` — UP/DOWN state machine
+- `exercises/form.py` — cautious educational observations
+
+### Laravel gateway
+
+`MotionService` validates uploads and exercises, forwards multipart to FastAPI, and returns structured analysis without persisting raw video.
+

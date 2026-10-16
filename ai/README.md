@@ -1,9 +1,4 @@
-# AI services
+# OCTA FIT AI services
+Each service is independent. Phase 1 = health endpoints only.
 
-| Folder | Service | Planned port |
-|--------|---------|--------------|
-| `coach/` | AI Sports Coach | 8001 |
-| `physiotherapist/` | AI Physiotherapist | 8002 |
-| `motion_analyzer/` | Motion Analyzer | 8003 |
-
-Implementation deferred to Phases 7–9. See `docs/AI.md`.
+See per-service README files for run instructions.

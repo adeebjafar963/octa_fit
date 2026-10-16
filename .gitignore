@@ -63,6 +63,9 @@ tools/*.zip
 *.tmp
 .tmp/
 .temp/
+uploads/
+**/storage/app/private/motion_tmp/
+**/storage/app/tmp/
 
 # Coverage
 coverage/
